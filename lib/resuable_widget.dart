@@ -46,28 +46,6 @@ TextField reusableTextField(String text,bool ispasswordtype,TextEditingControlle
         ? TextInputType.visiblePassword: TextInputType.emailAddress,
   );
 }
-Container SignInSignUpButton(BuildContext context,bool isLogin, Function onTap){
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    height: 35.h,
-    margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
-    child: ElevatedButton(
-      onPressed: (){
-        onTap();
-      },
-      child: Text(isLogin? "Log In": "Sign Up",
-        style: TextStyle(color: Colors.white,fontSize: 16.sp,fontWeight: FontWeight.normal),
-      ),
-      style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.pressed)) {
-              return Colors.white10;
-            }
-            return Colors.blueAccent;
-          }),
-          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
-    ),
-  );
-}
+// Container SignInSignUpButton(BuildContext context,bool isLogin, Function onTap){
+//   return
+// }

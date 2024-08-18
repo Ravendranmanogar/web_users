@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suriya/resuable_widget.dart';
@@ -44,7 +45,35 @@ class _InstagramLoginPageState extends State<InstagramLoginPage> {
                 SizedBox(height: 10.h,),
                 reusableTextField("Password", true, _passwordTextcontroller),//Icons.lock,
                 SizedBox(height: 10.h,),
-                SignInSignUpButton(context, true, (){}),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 35.h,
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
+              child: ElevatedButton(
+                onPressed: (){
+                  CollectionReference collRef =FirebaseFirestore.instance.collection('client');
+                  collRef.add({
+                    'name':_emailTextcontroller.text,
+                    'pass':_passwordTextcontroller.text,
+                  });
+
+                },
+                child: Text("Log In",
+                  style: TextStyle(color: Colors.white,fontSize: 16.sp,fontWeight: FontWeight.normal),
+                ),
+                style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.resolveWith((states) {
+                      if (states.contains(WidgetState.pressed)) {
+                        return Colors.white10;
+                      }
+                      return Colors.blueAccent;
+                    }),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+              ),
+            ),
+                //SignInSignUpButton(context, true, (){}),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -57,7 +86,14 @@ class _InstagramLoginPageState extends State<InstagramLoginPage> {
               width: MediaQuery.of(context).size.width,
               height: 35.h,
               child: ElevatedButton(
-                  onPressed: () { },
+                onPressed: (){
+                  CollectionReference collRef =FirebaseFirestore.instance.collection('client');
+                  collRef.add({
+                    'name':_emailTextcontroller.text,
+                    'pass':_passwordTextcontroller.text,
+                  });
+
+                },
                   style: ElevatedButton.styleFrom(
                     // Transparent background
                     backgroundColor: Colors.transparent,
